@@ -22,11 +22,7 @@
     "@babel/traverse": "^7.5.5",
     "@babel/types": "^7.5.5",
     "@walrus/shared-utils": "^0.3.0",
-    "chalk": "^2.4.2",
-    "common-bin": "^2.8.2",
-    "lodash": "^4.17.15",
-    "require-from-string": "^2.0.2",
-    "yargs-parser": "^13.1.1"
+    "common-bin": "^2.8.2"
   },
   "devDependencies": {
     "@types/babel__traverse": "^7.0.7",

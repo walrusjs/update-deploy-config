@@ -6,9 +6,7 @@ class MainCommand extends Command {
   private transform: Transform;
   constructor(rawArgv?) {
     super(rawArgv);
-    this.transform = new Transform({
-      rootDir: process.cwd()
-    });
+    this.transform = new Transform();
   }
 
   run(context) {

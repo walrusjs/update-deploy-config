@@ -1,25 +1,26 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join, resolve } from 'path';
-import { isFunction } from 'lodash';
-import { template } from 'lodash';
 import stringToObject, { IConfig } from './utils/stringToObject';
-import { configLoader } from '@walrus/shared-utils';
-import { IOptions } from './type';
-import logger from './logger';
+import { configLoader, Logger, lodash } from '@walrus/shared-utils';
 
-interface IRunConfig {
-  filePath: string;
-  fileName: string;
+export interface Config {
+  dir?: string;
+  // 配置文件 默认 config.js
+  file?: string;
   iterator?: (key, obj) => string;
 }
 
+const logger = new Logger();
+const { isFunction, template } = lodash;
+
 export class Transform {
-  private readonly config: IRunConfig;
+  private readonly config: Config;
   private readonly rootDir: string;
   private readonly filePath: string;
 
-  constructor(options: IOptions) {
-    this.rootDir = resolve(options.rootDir || '.');
+  constructor(options: Config = {}) {
+    this.rootDir = resolve(options.dir || '.');
+
     const userConfig = configLoader.loadSync({
       files: [
         'deploy.config.js',
@@ -29,21 +30,16 @@ export class Transform {
     });
 
     this.config = Object.assign({
-      filePath: '.',
-      fileName: './config.js',
-      iterator: (key, obj) => {
-        return obj[key];
-      }
+      dir: process.cwd(),
+      file: 'config.js'
     }, userConfig.data);
 
-    this.filePath = resolve(this.config.filePath, this.config.fileName);
+    this.filePath = resolve(this.config.dir || '', this.config.file || '');
   }
 
   run() {
     const { iterator } = this.config;
     let code;
-
-    logger.log('---------开始处理---------');
 
     // 1. 读取配置文件
     try {
@@ -84,11 +80,10 @@ export class Transform {
     writeFileSync(this.filePath, result);
 
     Object.keys(newConfig).forEach(item => {
-      logger.success(`${item}: ${newConfig[item]}`)
+      logger.info(`${item}: ${newConfig[item]}`)
     });
 
-    logger.log('---------处理成功---------');
-
+    logger.done('处理成功！')
   }
 }
 
