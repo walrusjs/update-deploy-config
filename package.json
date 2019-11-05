@@ -1,0 +1,39 @@
+{
+  "name": "@walrus/update-deploy-config",
+  "version": "1.0.0",
+  "main": "lib/cli.js",
+  "repository": "git@github.com:walrus-plus/update-deploy-config.git",
+  "author": "wangxingkang <wang_xingkang@qq.com>",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "bin": {
+    "update-deploy": "lib/cli.js"
+  },
+  "scripts": {
+    "build": "father-build",
+    "update-deploy": "node lib/cli.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/parser": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/traverse": "^7.5.5",
+    "@babel/types": "^7.5.5",
+    "@walrus/shared-utils": "^0.3.0",
+    "chalk": "^2.4.2",
+    "common-bin": "^2.8.2",
+    "lodash": "^4.17.15",
+    "require-from-string": "^2.0.2",
+    "yargs-parser": "^13.1.1"
+  },
+  "devDependencies": {
+    "@types/babel__traverse": "^7.0.7",
+    "@types/debug": "^4.1.5",
+    "@types/lodash": "^4.14.136",
+    "father-build": "^1.5.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  }
+}
