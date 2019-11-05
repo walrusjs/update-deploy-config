@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "father-build",
-    "update-deploy": "node lib/cli.js"
+    "update-deploy": "node lib/cli.js",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",
@@ -31,5 +32,11 @@
     "father-build": "^1.5.1",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
